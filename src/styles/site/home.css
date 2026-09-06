@@ -531,9 +531,14 @@ a.nh-plate__in:focus-visible { outline: 2px solid var(--sc-accent); outline-offs
   .nh-hero__cta { justify-content: center; }
   /* one row, always: two stacked figures on a short phone climb into the portrait */
   .nh-hero__stats { justify-content: center; text-align: center; margin-bottom: var(--sc-4); flex-wrap: nowrap; gap: 1.5rem; }
-  .nh-hero__stats li { justify-items: center; }
+  /* min-width lets a figure shrink under its label: flex items floor at
+     min-content by default, which on a 390px screen pushed both labels off
+     the sides of the viewport. */
+  .nh-hero__stats li { justify-items: center; min-width: 0; }
   .nh-hero__n { font-size: 1.2rem; }
-  .nh-hero__stats small { font-size: 0.68rem; white-space: nowrap; }
+  /* these labels name a measurement and a qualifier, so they run longer than
+     one phone-width line and wrap to two rather than being held on one. */
+  .nh-hero__stats small { font-size: 0.68rem; text-wrap: balance; }
   .nh-hero__sub { font-size: var(--sc-t-base); }
   .nh-hero__links > a:not(.nh-btn) { display: none; }
   .nh-hero__links .nh-btn { margin-left: 0; }

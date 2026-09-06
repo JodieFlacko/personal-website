@@ -112,7 +112,24 @@ export function mountHome() {
     var count = 0;
     nodes.forEach(function (node) {
       var frag = document.createDocumentFragment();
-      node.nodeValue.split(/(\s+)/).forEach(function (part) {
+      var parts = node.nodeValue.split(/(\s+)/);
+      /* Punctuation opening a text node that sits hard against the element
+         before it — the comma in "**No control group**, so the rate moved" —
+         belongs to the word in front of it. Each .fw is an inline-block, and
+         two adjacent inline-blocks are a legal line-break opportunity even
+         with no whitespace between them, so left on its own the comma can
+         start a line. Nate's copy never bolded mid-sentence; the house style
+         here bolds the caveat, so this pattern is throughout both locales.
+         Nodes arrive in document order, so the previous sibling has already
+         been split and its last word is there to absorb this. */
+      if (parts[0] && !/^\s/.test(node.nodeValue)) {
+        var prev = node.previousSibling;
+        var prevWords = prev && prev.nodeType === 1 ? prev.querySelectorAll('.fw') : null;
+        if (prevWords && prevWords.length) {
+          prevWords[prevWords.length - 1].textContent += parts.shift();
+        }
+      }
+      parts.forEach(function (part) {
         if (!part) return;
         if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
         var w = document.createElement('span'); w.className = 'fw'; w.textContent = part;
