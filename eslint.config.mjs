@@ -12,16 +12,16 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Runtime ported verbatim from the cloned site. Reformatting or "fixing" it
-    // would change tuned scroll maths, so it is not linted.
-    "src/lib/sites/**",
+    // The scroll engine, ported verbatim from the reference site. Reformatting
+    // or "fixing" it would change tuned scroll maths, so it is not linted.
+    "src/lib/site/**",
   ]),
   {
-    // Cloned pages reproduce the source markup exactly. next/image wraps images
-    // in its own element and rewrites their styles, which breaks the ported
-    // CSS's descendant selectors and measured layout, so plain <img> is correct
-    // here and the rule is off for cloned components only.
-    files: ["src/components/sites/**/*.tsx"],
+    // next/image wraps images in its own element and rewrites their styles,
+    // which breaks the ported CSS's descendant selectors and its measured
+    // layout, so plain <img> is correct here and the rule is off for the page's
+    // own components only.
+    files: ["src/components/site/**/*.tsx"],
     rules: { "@next/next/no-img-element": "off" },
   },
 ]);
