@@ -424,37 +424,11 @@ a.nh-plate__in:focus-visible { outline: 2px solid var(--sc-accent); outline-offs
 .nh-rail__end p { font-size: var(--sc-t-lg); font-weight: 500; line-height: 1.4; }
 .nh-rail__end-cta { margin-top: var(--sc-5); }
 
-/* ---- 5b · the rail's cards ------------------------------------------------
-   The reference site panned six photographs past. This pans five systems, and
-   each one keeps the photograph frame: a screenshot drops into it later
-   without the rail's geometry moving, which is the whole reason the shapes are
-   still the shapes. The body under it reads problem -> built -> changed, the
-   order every project page in the record follows.
-
-   The widths grow over the bare photo frames because a frame only had to hold
-   a picture and a card has to hold a paragraph. */
-.nh-work { display: flex; flex-direction: column; align-items: stretch; }
-.nh-work.nh-room--square { width: clamp(18rem, 28vw, 25rem); }
-.nh-work.nh-room--wide   { width: clamp(22rem, 40vw, 35rem); }
-.nh-work.nh-room--tall   { width: clamp(17rem, 26vw, 23rem); }
-.nh-work.nh-room--land   { width: clamp(21rem, 34vw, 31rem); }
-/* the one card holding real imagery: two redacted ERP strips, so it sizes to
+/* the one frame holding real imagery: two redacted ERP strips, so it sizes to
    them rather than to a ratio */
-.nh-work.nh-room--strip  { width: clamp(24rem, 46vw, 42rem); --nh-lift: -3vh; }
-.nh-work.nh-room--strip .nh-room__frame { display: grid; gap: 0.5rem; padding: 0.5rem; background: #fff; }
-.nh-work.nh-room--strip .nh-room__frame img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 0 0 1px rgb(11 13 16 / 0.07); }
-.nh-work__caption { margin-top: 0.7rem; font-size: 0.74rem; line-height: 1.5; color: var(--sc-ink-soft); }
-.nh-work__body { margin-top: 0.85rem; padding: clamp(0.95rem, 1.6vw, 1.25rem) clamp(1rem, 1.8vw, 1.35rem); display: grid; gap: 0.55rem; }
-.nh-work__kind { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nh-blue-deep); }
-.nh-work__title { font-family: var(--sc-font-display); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; font-size: clamp(1.1rem, 0.95rem + 0.55vw, 1.5rem); margin: 0; }
-.nh-work__lines { margin: 0.35rem 0 0; display: grid; gap: 0.6rem; }
-.nh-work__lines > div { display: grid; grid-template-columns: 4.75rem minmax(0, 1fr); gap: 0.75rem; align-items: baseline; }
-.nh-work__lines dt { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink-soft); }
-.nh-work__lines dd { margin: 0; font-size: 0.82rem; line-height: 1.5; color: var(--sc-ink); }
-.nh-work__lines dd strong { font-weight: 600; }
-.nh-work__lines dd code { font-family: var(--sc-font-mono); font-size: 0.94em; }
-.nh-work__stack { margin-top: 0.35rem; padding-top: 0.6rem; border-top: 1px solid var(--sc-hairline); font-size: 0.72rem; line-height: 1.5; color: var(--sc-ink-soft); }
-.nh-work__stack span { font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.64rem; color: var(--sc-ink-soft); margin-right: 0.35rem; }
+.nh-room--strip { width: clamp(24rem, 46vw, 42rem); --nh-lift: -3vh; }
+.nh-room--strip .nh-room__frame { display: grid; gap: 0.5rem; padding: 0.5rem; background: #fff; }
+.nh-room--strip .nh-room__frame img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 0 0 1px rgb(11 13 16 / 0.07); }
 @media (prefers-reduced-motion: no-preference) {
   .nh-room { opacity: calc(0.55 + 0.45 * var(--nh-settle, 1)); transform: translateY(calc(var(--nh-lift) + (1 - var(--nh-settle, 1)) * 30px)); }
 }
@@ -567,14 +541,7 @@ a.nh-plate__in:focus-visible { outline: 2px solid var(--sc-accent); outline-offs
   .nh-room--square { width: min(60vw, 16rem); }
   .nh-room--tall { width: min(52vw, 14rem); }
   .nh-room--land { width: min(76vw, 22rem); }
-  /* the cards keep one width on a phone: a 52vw column cannot hold a
-     paragraph, and the rail pans, so a wider card simply travels further */
-  .nh-work.nh-room--square,
-  .nh-work.nh-room--wide,
-  .nh-work.nh-room--tall,
-  .nh-work.nh-room--land { width: min(84vw, 26rem); }
-  .nh-work.nh-room--strip { width: min(88vw, 30rem); }
-  .nh-work__lines > div { grid-template-columns: 1fr; gap: 0.15rem; }
+  .nh-room--strip { width: min(88vw, 30rem); }
   .nh-rail__end { width: min(84vw, 24rem); }
   .nh-story__photos { min-height: 22rem; }
   /* compact foot and a smaller close so the heading clears the pill on a
@@ -615,13 +582,13 @@ a.nh-plate__in:focus-visible { outline: 2px solid var(--sc-accent); outline-offs
    goes for the same reason. */
 @media (pointer: coarse) {
   .nh-pill, .nh-plate__in, .nh-btn--ghost, .nh-rail__lead, .nh-room figcaption,
-  .nh-ring__copy, .nh-ring__caption, .nh-foot, .nh-plate-soft, .nh-work__body {
+  .nh-ring__copy, .nh-ring__caption, .nh-foot, .nh-plate-soft {
     backdrop-filter: none; -webkit-backdrop-filter: none;
   }
   .nh-pill { background: rgb(250 251 253 / 0.94); }
   .nh-plate__in { background: rgb(250 251 253 / 0.9); }
   .nh-btn--ghost { background: rgb(255 255 255 / 0.9); }
-  .nh-rail__lead, .nh-ring__copy, .nh-plate-soft, .nh-work__body { background: rgb(245 246 248 / 0.86); }
+  .nh-rail__lead, .nh-ring__copy, .nh-plate-soft { background: rgb(245 246 248 / 0.86); }
   .nh-room figcaption, .nh-ring__caption { background: rgb(245 246 248 / 0.88); }
   .nh-foot { background: rgb(255 255 255 / 0.88); }
   [data-nh-flow] .fw { filter: none; transition: opacity 720ms var(--sc-ease-out), transform 720ms var(--sc-ease-out); }

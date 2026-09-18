@@ -3,25 +3,23 @@ import { LINKS, PROJECT_FRAMES } from "@/content/shared";
 
 import { ArrowUpRightIcon } from "./icons";
 import { Placeholder } from "./Placeholder";
-import { Rich } from "./Rich";
 
 /**
  * Act 5 · PRESENCE — a pan act, 3.5 viewports long, and the `#work` anchor.
  *
  * The engine translates `#rail` sideways across the act's progress (the 0.05
  * on [data-sc-pan] is the lead-in it holds before moving). On top of that the
- * runtime staggers each card's `--nh-settle` from 0 to 1 on a 0.13-wide window
- * starting at 0.02 + i * 0.13, so cards arrive in sequence as they travel. The
- * first is exempt — it is already on screen when the act begins, which is why
- * the measured system leads.
+ * runtime staggers each frame's `--nh-settle` from 0 to 1 on a 0.13-wide window
+ * starting at 0.02 + i * 0.13, so frames arrive in sequence as they travel. The
+ * first is exempt — it is already on screen when the act begins.
  *
- * The reference site panned six photographs past. This pans the five systems:
- * each keeps the photo frame (so a screenshot drops straight in without moving
- * the rail's geometry) and gains a body reading problem → built → changed, the
- * order every project page in the record follows.
+ * The reference site panned six photographs past, each with a one-line
+ * caption. This pans the five systems the same way: a frame and the project's
+ * title, nothing more. A screenshot drops into a frame later without the
+ * rail's geometry moving.
  *
- * `mexal` is the one card with real imagery today: two redacted crops from the
- * delivered skill bundle. It sizes to them rather than to a ratio.
+ * `mexal` is the one frame with real imagery today: two redacted crops from
+ * the delivered skill bundle. It sizes to them rather than to a ratio.
  */
 export async function WorkRail() {
   const { work, slotNote } = await getDictionary();
@@ -43,8 +41,8 @@ export async function WorkRail() {
             const frame = PROJECT_FRAMES[project.id];
 
             return (
-              <article
-                className={`nh-room nh-work nh-room--${frame.shape}`}
+              <figure
+                className={`nh-room nh-room--${frame.shape}`}
                 key={project.id}
               >
                 <div className="nh-room__frame">
@@ -63,44 +61,8 @@ export async function WorkRail() {
                     <Placeholder label={project.slot ?? ""} note={slotNote} />
                   )}
                 </div>
-                {project.caption ? (
-                  <p className="nh-work__caption" data-nh-flow>
-                    {project.caption}
-                  </p>
-                ) : null}
-
-                <div className="nh-work__body nh-plate-soft">
-                  <p className="nh-work__kind" data-nh-flow>
-                    {project.kind}
-                  </p>
-                  <h3 className="nh-work__title" data-nh-flow>
-                    {project.title}
-                  </h3>
-                  <dl className="nh-work__lines">
-                    <div>
-                      <dt>{work.labels.problem}</dt>
-                      <dd data-nh-flow>
-                        <Rich text={project.problem} />
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>{work.labels.built}</dt>
-                      <dd data-nh-flow>
-                        <Rich text={project.built} />
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>{work.labels.changed}</dt>
-                      <dd data-nh-flow>
-                        <Rich text={project.changed} />
-                      </dd>
-                    </div>
-                  </dl>
-                  <p className="nh-work__stack">
-                    <span>{work.labels.stack}</span> {frame.stack}
-                  </p>
-                </div>
-              </article>
+                <figcaption data-nh-flow>{project.title}</figcaption>
+              </figure>
             );
           })}
 
